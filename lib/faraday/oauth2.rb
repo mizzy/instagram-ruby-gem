@@ -24,6 +24,8 @@ module Faraday
         end
       end
 
+      env[:body] = set_form_data(env[:body]) if env[:body].instance_of?(Hash)
+
       @app.call env
     end
 
@@ -31,6 +33,18 @@ module Faraday
       @app = app
       @client_id = client_id
       @access_token = access_token
+    end
+
+    def set_form_data(params, sep = '&')
+      params.map {|k, v| encode_kvpair(k, v) }.flatten.join(sep)
+    end
+
+    def encode_kvpair(k, vs)
+      Array(vs).map {|v| "#{urlencode(k.to_s)}=#{urlencode(v.to_s)}" }
+    end
+
+    def urlencode(str)
+      str.dup.force_encoding('ASCII-8BIT').gsub(/[^a-zA-Z0-9_\.\-]/){'%%%02x' % $&.ord}
     end
   end
 end
