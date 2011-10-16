@@ -35,7 +35,7 @@ module Instagram
       # @see TODO:docs url
       def like_media(id, options={})
         response = post("media/#{id}/likes", options)
-        response["data"]
+        response
       end
 
       # Removes the like on a givem media item ID for the currently authenticated user
@@ -51,7 +51,7 @@ module Instagram
       # @see TODO:docs url
       def unlike_media(id, options={})
         response = delete("media/#{id}/likes", options)
-        response["data"]
+        response
       end
     end
   end

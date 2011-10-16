@@ -36,7 +36,7 @@ module Instagram
       # @see TODO:docs url
       def create_media_comment(id, text, options={})
         response = post("media/#{id}/comments", options.merge(:text => text))
-        response["data"]
+        response
       end
 
       # Deletes a comment for a given media item ID

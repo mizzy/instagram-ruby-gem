@@ -160,7 +160,7 @@ module Instagram
       options = args.last.is_a?(Hash) ? args.pop : {}
       id = args.first || "self"
       response = get("users/#{id}/media/recent", options)
-      response["data"]
+      response
     end
 
     # Returns a list of media items liked by the current user
@@ -213,7 +213,7 @@ module Instagram
     def follow_user(id, options={})
       options["action"] = "follow"
       response = post("users/#{id}/relationship", options)
-      response["data"]
+      response
     end
 
     # Destroy a follows relationship between the current user and the target user
@@ -231,7 +231,7 @@ module Instagram
     def unfollow_user(id, options={})
       options["action"] = "unfollow"
       response = post("users/#{id}/relationship", options)
-      response["data"]
+      response
     end
 
     # Block a relationship between the current user and the target user
